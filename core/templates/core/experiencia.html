@@ -36,7 +36,7 @@
     }
     .exp-card.active .exp-arrow { transform: rotate(180deg); }
 
-    /* Contenido expandible (Oculto por defecto) */
+   /* 1. Contenido oculto por defecto */
     .exp-content { 
         max-height: 0; 
         overflow: hidden; 
@@ -44,26 +44,26 @@
         padding: 0 1.5rem;
     }
     
-    /* Cuando se abre, le damos una altura fija y habilitamos el scroll */
+    /* 2. Cuando la tarjeta se abre (ACÁ ESTÁ LA MAGIA DEL SCROLL) */
     .exp-card.active .exp-content { 
-        max-height: 350px; /* Altura límite antes de empezar a scrollear */
-        overflow-y: auto; /* Activa la barra desplazante vertical */
+        max-height: 280px; /* Límite de altura: si el texto es más largo, hace scroll */
+        overflow-y: auto; /* Activa la barra vertical de desplazamiento */
         padding-bottom: 1.5rem; 
         margin-top: 0.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.05); /* Línea sutil de separación */
+        border-top: 1px solid rgba(255, 255, 255, 0.05); /* Linea divisoria sutil */
         padding-top: 1rem;
     }
 
-    /* Estilos personalizados para la barrita de scroll (hace juego con el morado) */
+    /* 3. Darle color morado a la barrita de scroll para que no se vea gris y fea */
     .exp-content::-webkit-scrollbar {
         width: 6px;
     }
     .exp-content::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.15); /* Color del "caminito" de la barra */
         border-radius: 10px;
     }
     .exp-content::-webkit-scrollbar-thumb {
-        background: var(--primary);
+        background: var(--primary); /* Tu color morado principal */
         border-radius: 10px;
     }
 
