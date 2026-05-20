@@ -104,9 +104,28 @@
         footer a:hover { color: var(--secondary); text-decoration: none; }
 
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 1rem; border-radius: 20px; padding: 1.5rem; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
-            header { width: 95%; top: 10px; }
+            header { width: 95%; top: 10px; margin-bottom: 2rem; }
+            nav { 
+                flex-direction: column; 
+                gap: 0.8rem; 
+                border-radius: 16px; 
+                padding: 1.2rem; 
+            }
+            .nav-links { 
+                display: flex; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 1rem; 
+                width: 100%;
+            }
+            .nav-links a:not(.btn-cv) {
+                font-size: 0.9rem;
+            }
+            .btn-cv { 
+                width: 100%; /* El botón ocupa todo el ancho */
+                text-align: center; 
+                margin-top: 0.5rem;
+            }
         }
         /* Estilos de la Notificación (Toast) */
         .toast-notificacion {
