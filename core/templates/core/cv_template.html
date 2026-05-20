@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: a4; margin: 2cm; }
+        body { font-family: Helvetica, sans-serif; font-size: 11pt; color: #222; line-height: 1.4; }
+        h1 { color: #0f172a; font-size: 22pt; margin-bottom: 5px; }
+        .subtitle { color: #475569; font-size: 12pt; margin-bottom: 20px; }
+        .contact-info { font-size: 10pt; color: #333; margin-bottom: 30px; }
+        .contact-info a { color: #0284c7; text-decoration: none; }
+        
+        h2 { color: #0f172a; font-size: 14pt; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-top: 20px; margin-bottom: 15px; }
+        
+        .entry { margin-bottom: 15px; }
+        .entry-title { font-weight: bold; font-size: 12pt; }
+        .entry-meta { font-style: italic; font-size: 10pt; color: #64748b; margin-bottom: 5px; }
+        .entry-desc { font-size: 10.5pt; text-align: justify; }
+        
+        .skills { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>{{ perfil.nombre }}</h1>
+    <div class="subtitle">{{ perfil.titulo_principal }} | {{ perfil.titulo_intermedio }}</div>
+    
+    <div class="contact-info">
+        San Juan, Argentina <br>
+        Email:  <a href="mailto:agus.cue02@gmail.com?subject=Contacto%20desde%20el%20Portfolio%20Web">agus.cue02@gmail.com</a> | LinkedIn: <a href="{{ perfil.linkedin | default:'https://www.linkedin.com/in/agustina-narvaez-248914296' }}">in/agustina-narvaez</a> | GitHub: <a href="{{ perfil.github | default:'https://github.com/AgusCuevas02' }}">AgusCuevas02</a> | WhatsApp: <a href="{{ perfil.whatsapp | default:'https://wa.me/542645810568' }}">2645810568</a></div>
+
+    <h2>Educación</h2>
+    {% for edu in educaciones %}
+    <div class="entry">
+        <div class="entry-title">{{ edu.titulo }} - {{ edu.institucion }}</div>
+        <div class="entry-meta">{{ edu.fecha_inicio|date:"Y" }} - {% if edu.en_curso %}Presente{% else %}{{ edu.fecha_fin|date:"Y" }}{% endif %}</div>
+    </div>
+    {% endfor %}
+
+    <h2>Experiencia Laboral y Proyectos</h2>
+    {% for exp in experiencias %}
+    <div class="entry">
+        <div class="entry-title">{{ exp.puesto }} en {{ exp.empresa }}</div>
+        <div class="entry-meta">{{ exp.fecha_inicio|date:"M Y" }} - {% if exp.actual %}Presente{% else %}{{ exp.fecha_fin|date:"M Y" }}{% endif %}</div>
+        <div class="entry-desc">{{ exp.descripcion }}</div>
+    </div>
+    {% empty %}
+    <p>Desarrollo de proyectos backend, configuración de servidores Apache, scripts en Python sobre instancias GCP (Google Cloud Platform) y despliegue de sistemas distribuidos.</p>
+    {% endfor %}
+
+    <h2>Stack Tecnológico</h2>
+    <div class="skills">
+        {% for hab in habilidades %}
+            {{ hab.nombre }} ({{ hab.nivel }}){% if not forloop.last %}, {% endif %}
+        {% empty %}
+            C, C++, Python, Java, SQL (PostgreSQL), Haskell, JavaScript, HTML, CSS.
+        {% endfor %}
+    </div>
+
+</body>
+</html>

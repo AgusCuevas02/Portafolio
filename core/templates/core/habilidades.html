@@ -1,0 +1,74 @@
+<style>
+    .section-title { font-size: 2.2rem; color: #ffffff; text-align: center; margin-bottom: 2rem; position: relative; }
+    .section-title::after { content: ''; display: block; width: 40px; height: 4px; background: var(--primary); margin: 8px auto 0 auto; border-radius: 2px; }
+    
+    .category-title { font-size: 1.2rem; color: var(--secondary); margin-bottom: 1rem; margin-top: 2.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+    
+    .skill-card { background: var(--glass-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--glass-border); transition: transform 0.2s, border-color 0.2s; }
+    .skill-card:hover { transform: translateY(-5px); border-color: var(--secondary); background: rgba(30, 41, 59, 0.6); }
+    .skill-name { font-size: 1.15rem; font-weight: bold; margin-bottom: 0.8rem; color: #ffffff; }
+    
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+    .b-avanzado { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+    .b-intermedio { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(125, 211, 252, 0.2); }
+    .b-basico { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(203, 213, 225, 0.2); }
+</style>
+
+<h3 class="section-title">Stack Tecnológico</h3>
+
+{% if lenguajes %}
+<h4 class="category-title">Lenguajes de Programación</h4>
+<div class="skills-grid">
+    {% for hab in lenguajes %}
+        <div class="skill-card">
+            <div class="skill-name">{{ hab.nombre }}</div>
+            {% if hab.nivel == 'Avanzado' %}<span class="badge b-avanzado">{{ hab.nivel }}</span>
+            {% elif hab.nivel == 'Intermedio' %}<span class="badge b-intermedio">{{ hab.nivel }}</span>
+            {% else %}<span class="badge b-basico">{{ hab.nivel }}</span>{% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if frameworks %}
+<h4 class="category-title">Frameworks y Librerías</h4>
+<div class="skills-grid">
+    {% for hab in frameworks %}
+        <div class="skill-card">
+            <div class="skill-name">{{ hab.nombre }}</div>
+            {% if hab.nivel == 'Avanzado' %}<span class="badge b-avanzado">{{ hab.nivel }}</span>
+            {% elif hab.nivel == 'Intermedio' %}<span class="badge b-intermedio">{{ hab.nivel }}</span>
+            {% else %}<span class="badge b-basico">{{ hab.nivel }}</span>{% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if plataformas %}
+<h4 class="category-title">Plataformas o Software</h4>
+<div class="skills-grid">
+    {% for hab in plataformas %}
+        <div class="skill-card">
+            <div class="skill-name">{{ hab.nombre }}</div>
+            {% if hab.nivel == 'Avanzado' %}<span class="badge b-avanzado">{{ hab.nivel }}</span>
+            {% elif hab.nivel == 'Intermedio' %}<span class="badge b-intermedio">{{ hab.nivel }}</span>
+            {% else %}<span class="badge b-basico">{{ hab.nivel }}</span>{% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if herramientas %}
+<h4 class="category-title">Herramientas</h4>
+<div class="skills-grid">
+    {% for hab in herramientas %}
+        <div class="skill-card">
+            <div class="skill-name">{{ hab.nombre }}</div>
+            {% if hab.nivel == 'Avanzado' %}<span class="badge b-avanzado">{{ hab.nivel }}</span>
+            {% elif hab.nivel == 'Intermedio' %}<span class="badge b-intermedio">{{ hab.nivel }}</span>
+            {% else %}<span class="badge b-basico">{{ hab.nivel }}</span>{% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

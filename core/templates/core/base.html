@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agustina Narvaez | Portfolio</title>
+    <style>
+        /* Paleta Dark / Morado Neón */
+        :root {
+            --primary: #a855f7; /* Morado neón brillante */
+            --secondary: #38bdf8; /* Celeste neón para contraste */
+            --bg-dark: #0f172a; /* Azul noche muy oscuro */
+            --bg-purple: #2e1065; /* Morado profundo */
+            --text-main: #f8fafc; /* Blanco humo */
+            --text-muted: #94a3b8; /* Gris claro */
+            --glass-bg: rgba(30, 41, 59, 0.6); /* Cristal oscuro */
+            --glass-border: rgba(255, 255, 255, 0.08); /* Borde sutil */
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-purple) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Orbes de luz neón de fondo */
+        .bg-orb { position: absolute; filter: blur(90px); z-index: -1; opacity: 0.5; border-radius: 50%; }
+        .orb1 { top: -100px; left: -100px; width: 450px; height: 450px; background: rgba(168, 85, 247, 0.35); }
+        .orb2 { bottom: 10%; right: -100px; width: 350px; height: 350px; background: rgba(56, 189, 248, 0.25); }
+
+        header { position: sticky; top: 20px; z-index: 100; width: 90%; max-width: 1000px; margin: 0 auto 2rem auto; }
+
+        nav { 
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 1rem 2rem;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-radius: 50px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+
+        .nav-links a { 
+            color: var(--text-main);
+            text-decoration: none; 
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:not(.btn-cv)::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+            background: var(--secondary); transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        .nav-links a:not(.btn-cv):hover::after { width: 100%; }
+        .nav-links a:not(.btn-cv):hover { color: var(--primary); }
+
+        .btn-cv { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white !important;
+            padding: 0.6rem 1.5rem !important; 
+            border-radius: 30px; 
+            font-weight: 600; 
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-cv:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6); }
+
+        .container { 
+            max-width: 1000px; margin: 0 auto; padding: 0 2rem; flex-grow: 1; width: 100%;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        footer { text-align: center; padding: 2rem; margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem; }
+        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; font-weight: 600; transition: color 0.2s; }
+        footer a:hover { color: var(--secondary); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 1rem; border-radius: 20px; padding: 1.5rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            header { width: 95%; top: 10px; }
+        }
+        /* Estilos de la Notificación (Toast) */
+        .toast-notificacion {
+            position: fixed;
+            bottom: -100px; /* Oculto abajo por defecto */
+            right: 20px;
+            background: rgba(168, 85, 247, 0.25); /* Morado traslúcido */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            font-weight: 500;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Efecto rebote */
+        }
+
+        .toast-notificacion.mostrar {
+            bottom: 30px; /* Sube y se muestra */
+        }
+
+        .toast-icono {
+            background: var(--secondary);
+            color: #0f172a;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">Agustina Narvaez</a>
+            <div class="nav-links">
+                <a href="#seccion-sobremi">Sobre Mí</a>
+                <a href="#seccion-habilidades">Habilidades</a>
+                <a href="#seccion-experiencia">Experiencia</a>
+                <a href="{% url 'descargar_cv' %}" class="btn-cv" onclick="avisarDescarga()">Descargar CV</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 - Portfolio Agustina Narvaez</p>
+        <div style="margin-top: 10px;">
+        {% if perfil %}
+            <a href="{{ perfil.linkedin }}" target="_blank">LinkedIn</a> • 
+            <a href="{{ perfil.github }}" target="_blank">GitHub</a>
+        {% else %}
+            <a href="https://www.linkedin.com/in/agustina-narvaez-248914296" target="_blank">LinkedIn</a> • 
+            <a href="https://github.com" target="_blank">GitHub</a>
+        {% endif %}
+        </div>
+    </footer>
+    <div id="toast-cv" class="toast-notificacion">
+            <div class="toast-icono">✓</div>
+            <span>¡Tu CV se está descargando!</span>
+        </div>
+
+        <script>
+            function avisarDescarga() {
+                const toast = document.getElementById('toast-cv');
+                // Le agregamos la clase que lo hace subir
+                toast.classList.add('mostrar');
+                
+                // Lo ocultamos automáticamente después de 4 segundos
+                setTimeout(() => {
+                    toast.classList.remove('mostrar');
+                }, 4000);
+            }
+        </script>
+</body>
+</html>

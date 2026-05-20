@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <style>
+        /* Animación de entrada */
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* MAGIA ACÁ: Le da un margen invisible a todas las secciones al hacer scroll */
+        section {
+            scroll-margin-top: 130px; /* Ajustá este número si querés más o menos espacio */
+        }
+    </style>
+
+    <section id="seccion-sobremi" style="animation: fadeIn 0.8s ease-out forwards;">
+        {% include 'core/sobre_mi.html' %}
+    </section>
+
+    <section id="seccion-habilidades" style="margin-top: 6rem; animation: fadeIn 1s ease-out forwards;">
+        {% include 'core/habilidades.html' %}
+    </section>
+
+    <section id="seccion-experiencia" style="margin-top: 6rem; animation: fadeIn 1s ease-out forwards;">
+        {% include 'core/experiencia.html' %}
+    </section>
+{% endblock %}

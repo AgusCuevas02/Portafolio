@@ -1,0 +1,97 @@
+<style>
+    .about-layout { display: flex; gap: 3rem; align-items: flex-start; }
+    
+    .bio-column { flex: 1.8; display: flex; flex-direction: column; justify-content: center; }
+    .bio-column h1 { font-size: 3rem; margin-bottom: 0.2rem; color: #ffffff; }
+    .bio-column h2 { font-size: 1.4rem; color: var(--secondary); font-weight: 500; margin-bottom: 0.5rem; }
+    .bio-column h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; margin-bottom: 1.5rem; }
+    .bio-text { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+    .bio-text strong { color: var(--secondary); }
+    
+    /* Sidebar Derecho de Contacto */
+    .contact-sidebar { 
+        flex: 1.2; 
+        height: fit-content;
+        background: var(--glass-bg); 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px); 
+        padding: 2.5rem; 
+        border-radius: 16px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        border: 1px solid var(--glass-border);
+        border-top: 4px solid var(--primary);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .sidebar-title { font-size: 1.3rem; color: #ffffff; margin-bottom: 1.5rem; font-weight: 600; }
+    .contact-item { margin-bottom: 1.2rem; }
+    .contact-label { font-size: 0.8rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+    .contact-value, .contact-value a { color: #f8fafc; font-weight: 500; text-decoration: none; word-break: break-all; transition: color 0.2s; }
+    .contact-value a:hover { color: var(--secondary); }
+    
+    @media (max-width: 768px) { 
+        .about-layout { flex-direction: column; gap: 2rem; } 
+    }
+</style>
+
+<div class="about-layout">
+    <div class="bio-column">
+        <h1>{{ perfil.nombre|default:"Agustina Narvaez" }}</h1>
+        <h2>{{ perfil.titulo_intermedio|default:"Técnica Universitaria en Programación" }}</h2>
+        <h3>{{ perfil.titulo_principal|default:"Estudiante Avanzada en Ciencias de la Computación" }}</h3>
+        
+        <div class="bio-text">
+            {% if perfil.sobre_mi %}
+                {{ perfil.sobre_mi|linebreaks }}
+            {% else %}
+                <p>Mi camino en la informática combina una sólida formación lógica y analítica orientada al desarrollo de software y sistemas de datos de alto estándar.</p>
+                <p style="margin-top: 10px;">
+                    Actualmente enfoco mi crecimiento profesional hacia el campo del <strong>Análisis y la Ciencia de Datos</strong>. Cuento con experiencia práctica administrando motores relacionales avanzados como <strong>PostgreSQL</strong>, diseñando scripts eficientes y administrando despliegues sobre infraestructuras distribuidas y entornos cloud.
+                </p>
+                <p style="margin-top: 10px;">
+                    Combino las ciencias de la computación con un estilo de vida de alta disciplina enfocado en actividades de alta intensidad como el CrossFit y el running de montaña.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="contact-sidebar">
+        <div>
+            <div class="sidebar-title">Contacto & Redes</div>
+            
+            <div class="contact-item">
+                <div class="contact-label">Ubicación</div>
+                <div class="contact-value">San Juan, Argentina</div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">Correo Electrónico</div>
+                <div class="contact-value">
+<a href="mailto:agus.cue02@gmail.com?subject=Contacto%20desde%20el%20Portfolio%20Web">agus.cue02@gmail.com</a>                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">LinkedIn</div>
+                <div class="contact-value">
+                    <a href="{{ perfil.linkedin|default:'https://www.linkedin.com/in/agustina-narvaez-248914296' }}" target="_blank">in/agustina-narvaez</a>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-label">GitHub</div>
+                <div class="contact-value">
+                    <a href="{{ perfil.github|default:'https://github.com/AgusCuevas02' }}" target="_blank">github.com/perfil</a>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-label">WhatsApp</div>
+                <div class="contact-value">
+                    <a href="{{ perfil.whatsapp|default:'https://wa.me/542645810568' }}" target="_blank">WhatsApp/contacto</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
