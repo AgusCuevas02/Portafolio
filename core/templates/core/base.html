@@ -5,20 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agustina Narvaez | Portfolio</title>
     <style>
-        /* Paleta Dark / Morado Neón */
         :root {
-            --primary: #a855f7; /* Morado neón brillante */
-            --secondary: #38bdf8; /* Celeste neón para contraste */
-            --bg-dark: #0f172a; /* Azul noche muy oscuro */
-            --bg-purple: #2e1065; /* Morado profundo */
-            --text-main: #f8fafc; /* Blanco humo */
-            --text-muted: #94a3b8; /* Gris claro */
-            --glass-bg: rgba(30, 41, 59, 0.6); /* Cristal oscuro */
-            --glass-border: rgba(255, 255, 255, 0.08); /* Borde sutil */
+            --primary: #a855f7; 
+            --secondary: #38bdf8; 
+            --bg-dark: #0f172a; 
+            --bg-purple: #2e1065; 
+            --text-main: #f8fafc; 
+            --text-muted: #94a3b8; 
+            --glass-bg: rgba(30, 41, 59, 0.4); 
+            --glass-border: rgba(255, 255, 255, 0.08); 
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         body { 
@@ -32,15 +30,14 @@
             overflow-x: hidden;
         }
 
-        /* Orbes de luz neón de fondo */
         .bg-orb { position: absolute; filter: blur(90px); z-index: -1; opacity: 0.5; border-radius: 50%; }
         .orb1 { top: -100px; left: -100px; width: 450px; height: 450px; background: rgba(168, 85, 247, 0.35); }
         .orb2 { bottom: 10%; right: -100px; width: 350px; height: 350px; background: rgba(56, 189, 248, 0.25); }
 
-        header { position: sticky; top: 20px; z-index: 100; width: 90%; max-width: 1000px; margin: 0 auto 2rem auto; }
+        header { position: sticky; top: 20px; z-index: 100; width: 90%; max-width: 1000px; margin: 0 auto 3rem auto; }
 
         nav { 
-            background: var(--glass-bg);
+            background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             padding: 1rem 2rem;
@@ -50,6 +47,7 @@
             border-radius: 50px;
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
             border: 1px solid var(--glass-border);
+            position: relative; /* Necesario para el menú desplegable */
         }
 
         .logo {
@@ -62,8 +60,23 @@
             letter-spacing: -0.5px;
         }
 
-        .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+        /* DISEÑO DEL MENÚ HAMBURGUESA (Oculto en PC) */
+        .menu-btn { 
+            display: none; 
+            flex-direction: column; 
+            gap: 6px; 
+            cursor: pointer; 
+            z-index: 200; 
+        }
+        .menu-btn span { 
+            width: 28px; 
+            height: 3px; 
+            background-color: var(--secondary); 
+            border-radius: 3px; 
+            transition: all 0.3s ease; 
+        }
 
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; }
         .nav-links a { 
             color: var(--text-main);
             text-decoration: none; 
@@ -92,78 +105,66 @@
         }
         .btn-cv:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6); }
 
-        .container { 
-            max-width: 1000px; margin: 0 auto; padding: 0 2rem; flex-grow: 1; width: 100%;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; flex-grow: 1; width: 100%; }
+        footer { text-align: center; padding: 2rem; margin-top: 6rem; color: var(--text-muted); font-size: 0.9rem; }
+        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; font-weight: 600; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        footer { text-align: center; padding: 2rem; margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem; }
-        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; font-weight: 600; transition: color 0.2s; }
-        footer a:hover { color: var(--secondary); text-decoration: none; }
-
+        /* ESTILOS PARA CELULARES */
         @media (max-width: 768px) {
-            header { width: 95%; top: 10px; margin-bottom: 2rem; }
-            nav { 
-                flex-direction: column; 
-                gap: 0.8rem; 
-                border-radius: 16px; 
-                padding: 1.2rem; 
-            }
-            .nav-links { 
-                display: flex; 
-                flex-wrap: wrap; 
-                justify-content: center; 
-                gap: 1rem; 
+            header { width: 90%; top: 15px; margin-bottom: 2rem; }
+            nav { padding: 1rem 1.5rem; }
+            
+            /* 1. Mostramos el botón hamburguesa */
+            .menu-btn { display: flex; }
+
+            /* 2. Convertimos los enlaces en un cuadro desplegable oculto */
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
                 width: 100%;
+                background: rgba(15, 23, 42, 0.95); /* Un fondo más oscuro para que se lea bien */
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-radius: 20px;
+                border: 1px solid var(--glass-border);
+                padding: 2rem 1.5rem;
+                flex-direction: column;
+                gap: 1.5rem;
+                /* Oculto por defecto con animación suave */
+                opacity: 0;
+                transform: translateY(-15px);
+                pointer-events: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             }
-            .nav-links a:not(.btn-cv) {
-                font-size: 0.9rem;
+
+            /* 3. Esta clase se activa con Javascript para mostrar el menú */
+            .nav-links.active {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
             }
-            .btn-cv { 
-                width: 100%; /* El botón ocupa todo el ancho */
-                text-align: center; 
-                margin-top: 0.5rem;
-            }
+
+            /* 4. Animación de la hamburguesa convirtiéndose en una X */
+            .menu-btn.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-btn.active span:nth-child(2) { opacity: 0; }
+            .menu-btn.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            .nav-links a:not(.btn-cv) { font-size: 1.1rem; }
+            .btn-cv { width: 100%; text-align: center; margin-top: 0.5rem; }
         }
-        /* Estilos de la Notificación (Toast) */
+
+        /* Estilos del cartel de CV (Toast) */
         .toast-notificacion {
-            position: fixed;
-            bottom: -100px; /* Oculto abajo por defecto */
-            right: 20px;
-            background: rgba(168, 85, 247, 0.25); /* Morado traslúcido */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(168, 85, 247, 0.5);
-            color: #ffffff;
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 9999;
-            font-weight: 500;
-            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Efecto rebote */
+            position: fixed; bottom: -100px; right: 20px;
+            background: rgba(168, 85, 247, 0.25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.5); color: #ffffff; padding: 1rem 1.5rem;
+            border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px;
+            z-index: 9999; font-weight: 500; transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-
-        .toast-notificacion.mostrar {
-            bottom: 30px; /* Sube y se muestra */
-        }
-
-        .toast-icono {
-            background: var(--secondary);
-            color: #0f172a;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+        .toast-notificacion.mostrar { bottom: 30px; }
+        .toast-icono { background: var(--secondary); color: #0f172a; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -174,11 +175,18 @@
     <header>
         <nav>
             <a href="#" class="logo">Agustina Narvaez</a>
-            <div class="nav-links">
-                <a href="#seccion-sobremi">Sobre Mí</a>
-                <a href="#seccion-habilidades">Habilidades</a>
-                <a href="#seccion-experiencia">Experiencia</a>
-                <a href="{% url 'descargar_cv' %}" class="btn-cv" onclick="avisarDescarga()">Descargar CV</a>
+            
+            <div class="menu-btn" id="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#seccion-sobremi" onclick="cerrarMenu()">Sobre Mí</a>
+                <a href="#seccion-habilidades" onclick="cerrarMenu()">Habilidades</a>
+                <a href="#seccion-experiencia" onclick="cerrarMenu()">Experiencia</a>
+                <a href="{% url 'descargar_cv' %}" class="btn-cv" onclick="avisarDescarga(); cerrarMenu();">Descargar CV</a>
             </div>
         </nav>
     </header>
@@ -188,6 +196,39 @@
         {% endblock %}
     </main>
 
+    <div id="toast-cv" class="toast-notificacion">
+        <div class="toast-icono">✓</div>
+        <span>¡Tu CV se está descargando!</span>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar el menú hamburguesa
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Función para que el menú se cierre solo cuando eligen una sección
+        function cerrarMenu() {
+            if (window.innerWidth <= 768) {
+                menuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        }
+
+        // Función original de descarga de CV
+        function avisarDescarga() {
+            const toast = document.getElementById('toast-cv');
+            toast.classList.add('mostrar');
+            setTimeout(() => {
+                toast.classList.remove('mostrar');
+            }, 4000);
+        }
+    </script>
+    
     <footer>
         <p>© 2026 - Portfolio Agustina Narvaez</p>
         <div style="margin-top: 10px;">
@@ -200,22 +241,5 @@
         {% endif %}
         </div>
     </footer>
-    <div id="toast-cv" class="toast-notificacion">
-            <div class="toast-icono">✓</div>
-            <span>¡Tu CV se está descargando!</span>
-        </div>
-
-        <script>
-            function avisarDescarga() {
-                const toast = document.getElementById('toast-cv');
-                // Le agregamos la clase que lo hace subir
-                toast.classList.add('mostrar');
-                
-                // Lo ocultamos automáticamente después de 4 segundos
-                setTimeout(() => {
-                    toast.classList.remove('mostrar');
-                }, 4000);
-            }
-        </script>
 </body>
 </html>
